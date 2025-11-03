@@ -1,0 +1,9 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "typeRoots": ["./src/typings/index.d.ts", "./node_modules/@types"],
+    "types": ["node", "express"],
+    "target": "ESNext"
+  },
+  "include": ["src/index.d.ts", "src/**/*.ts"]
+}

@@ -39,8 +39,8 @@ const handler: RequestHandler = async (req, res) => {
     const opts: VerifyRegistrationResponseOpts = {
       response: registration,
       expectedChallenge,
-      expectedOrigin,
-      expectedRPID: rpID,
+      expectedOrigin: [expectedOrigin],
+      expectedRPID: [rpID],
       requireUserVerification: false,
     };
     verification = await verifyRegistrationResponse(opts);

@@ -61,8 +61,8 @@ const handler: RequestHandler = async (req, res) => {
     verification = await verifyAuthenticationResponse({
       response: authentication,
       expectedChallenge: expectedChallenge,
-      expectedOrigin,
-      expectedRPID: rpID,
+      expectedOrigin: [expectedOrigin],
+      expectedRPID: [rpID],
       credential: targetCredential,
       requireUserVerification: false,
     });

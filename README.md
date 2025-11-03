@@ -1,32 +1,40 @@
-# `Turborepo` Vite starter
+# WebAuthn 기반 PassKey 데모
 
-This is a community-maintained example. If you experience a problem, please submit a pull request with a fix. GitHub Issues will be closed.
+## Getting Started
 
-## Using this example
+### Installation
 
-Run the following command:
+Node.js 및 패키지 매니저 정보는 다음과 같습니다.
 
-```sh
-npx create-turbo@latest -e with-vite-react
+- Node.js: `^22`
+- Package Manager: `pnpm@8.15.6`
+
+```bash
+$ pnpm install
 ```
 
-## What's inside?
+### Start Apps
 
-This Turborepo includes the following packages and apps:
+본 레포지토리는 Turborepo로 작성되어 있으며, 클라이언트와 서버 모두 개발환경을 띄워야 합니다.
 
-### Apps and Packages
+```bash
+pnpm run dev # Turborepo에서 client, server 개발환경 실행
+```
 
-- `web`: react [vite](https://vitejs.dev) ts app
-- `@repo/ui`: a stub component library shared by `web` application
-- `@repo/eslint-config`: shared `eslint` configurations
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+클라이언트와 서버 URL은 다음과 같습니다.
 
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
+- client: https://localhost:3000
+- server: http://localhost:3001
 
-### Utilities
+## Play demo
 
-This Turborepo has some additional tools already setup for you:
+데모는 WebAuthn 기반으로 구현된 PassKey 방식을 체험해볼 수 있도록 되어 있습니다.
+[계정 등록]을 통해 해당 계정의 PassKey를 등록하고, 각각의 로그인 시나리오를 테스트할 수 있습니다.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### PassKey 자동 로그인
+
+PW 방식 대신 PassKey만으로 로그인하는 방식을 테스트합니다.
+
+### MFA 로그인
+
+전통적인 ID + PW 방식과 함께 2단 인증으로 PassKey를 사용합니다.

@@ -1,4 +1,4 @@
-# WebAuthn 기반 PassKey 데모
+# WebAuthn 기반 Passkey 데모
 
 ## Getting Started
 
@@ -28,13 +28,13 @@ pnpm run dev # Turborepo에서 client, server 개발환경 실행
 
 ## Play demo
 
-데모는 WebAuthn 기반으로 구현된 PassKey 방식을 체험해볼 수 있도록 되어 있습니다.
-[계정 등록]을 통해 해당 계정의 PassKey를 등록하고, 각각의 로그인 시나리오를 테스트할 수 있습니다.
+데모는 WebAuthn 기반으로 구현된 Passkey 방식을 체험해볼 수 있도록 되어 있습니다.
+[계정 등록]을 통해 해당 계정의 Passkey를 등록하고, 각각의 로그인 시나리오를 테스트할 수 있습니다.
 
-### PassKey 자동 로그인
+### Passkey 자동 로그인
 
-PW 방식 대신 PassKey만으로 로그인하는 방식을 테스트합니다.
+PW 방식 대신 Passkey만으로 로그인하는 방식을 테스트합니다.
 
 ### MFA 로그인
 
-전통적인 ID + PW 방식과 함께 2단 인증으로 PassKey를 사용합니다.
+전통적인 ID + PW 방식과 함께 2단 인증으로 Passkey를 사용합니다.

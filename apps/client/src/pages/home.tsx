@@ -48,13 +48,13 @@ export const HomePage = () => {
       ) : (
         <Flex direction="column" gap="2" mt="4">
           <Button onClick={() => navigate(Page.Register)} variant="soft">
-            2. 계정 등록 (PassKey 등록)
+            2. 계정 등록 (Passkey 등록)
           </Button>
           <Button onClick={() => navigate(Page.Login1)} variant="soft">
-            3. 로그인 예시 1 (PassKey 자동 로그인)
+            3. 로그인 예시 1 (Passkey 자동 로그인)
           </Button>
           <Button onClick={() => navigate(Page.Login2)} variant="soft">
-            4. 로그인 예시 2 (PassKey 기반 MFA)
+            4. 로그인 예시 2 (Passkey 기반 MFA)
           </Button>
         </Flex>
       )}

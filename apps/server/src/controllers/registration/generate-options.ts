@@ -46,7 +46,7 @@ const handler: RequestHandler = async (req, res) => {
     authenticatorSelection: {
       /**
        * 키 쌍을 인증기 내에 저장할지(상주 키) 또는 서버의 Credential ID를 참조하는 방식(비상주 키)을 사용할지 지정합니다:
-       * - required: 반드시 PassKey를 생성해야 함
+       * - required: 반드시 Passkey를 생성해야 함
        * - preferred: 상주 키를 선호하나, 지원하지 않을 경우 비상주 키도 지원함
        * - discouraged: 비상주 키를 선호
        */

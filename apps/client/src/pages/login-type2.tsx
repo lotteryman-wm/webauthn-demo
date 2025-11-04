@@ -88,7 +88,7 @@ export const LoginType2Page = () => {
     >
       <Heading size="5">4. 로그인 예시 2 (WebAuthn MFA)</Heading>
       <Text size="2">
-        ID/PW 방식과 혼용하여 2단계 인증으로 PassKey를 사용할 수도 있습니다.
+        ID/PW 방식과 혼용하여 2단계 인증으로 Passkey를 사용할 수도 있습니다.
       </Text>
 
       {step === 1 && (

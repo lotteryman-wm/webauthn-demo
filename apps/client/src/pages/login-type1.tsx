@@ -21,14 +21,14 @@ export const LoginType1Page = () => {
 
   useEffect(() => {
     /**
-     * 아이디 입력 없이 PassKey로 직접 로그인하는 방식
+     * 아이디 입력 없이 Passkey로 직접 로그인하는 방식
      */
     async function handleAutoFillLogin() {
       try {
         const optionsJSON = await webAuthn.authenticate.generateOptions();
 
         /**
-         * authenticationJSON은 Input 필드 내에서 PassKey 로그인 호출 시 Promise를 반환합니다.
+         * authenticationJSON은 Input 필드 내에서 Passkey 로그인 호출 시 Promise를 반환합니다.
          */
         const authenticationJSON =
           await webAuthn.authenticate.startAuthentication(optionsJSON, {
@@ -139,9 +139,9 @@ export const LoginType1Page = () => {
       p="5"
       style={{ maxWidth: 600, border: "1px solid var(--orange-7)" }}
     >
-      <Heading size="5">3. 로그인 예시 1 (PassKey 자동 로그인)</Heading>
+      <Heading size="5">3. 로그인 예시 1 (Passkey 자동 로그인)</Heading>
       <Text size="2">
-        아이디 또는 비밀번호 필드 클릭 시 PassKey 로그인을 시도할 수 있습니다.
+        아이디 또는 비밀번호 필드 클릭 시 Passkey 로그인을 시도할 수 있습니다.
       </Text>
 
       <Flex direction="column" gap="2">
@@ -174,7 +174,7 @@ export const LoginType1Page = () => {
         size="1"
       >
         <Callout.Text>
-          {message || "입력 필드 클릭 시 PassKey 선택이 활성화됩니다."}
+          {message || "입력 필드 클릭 시 Passkey 선택이 활성화됩니다."}
         </Callout.Text>
       </Callout.Root>
 

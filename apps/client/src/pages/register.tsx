@@ -70,7 +70,7 @@ export const RegisterPage = () => {
       p="5"
       style={{ maxWidth: 600, border: "1px solid var(--blue-7)" }}
     >
-      <Heading size="5">2. 계정 PassKey 등록</Heading>
+      <Heading size="5">2. 계정 Passkey 등록</Heading>
 
       <Flex direction="column" gap="2">
         <TextField.Root
@@ -84,7 +84,7 @@ export const RegisterPage = () => {
           disabled={loading}
         />
         <Button onClick={handleRegister} color="blue" disabled={loading}>
-          {loading ? "등록 처리 중..." : "PassKey Register 처리"}
+          {loading ? "등록 처리 중..." : "Passkey Register 처리"}
         </Button>
       </Flex>
 

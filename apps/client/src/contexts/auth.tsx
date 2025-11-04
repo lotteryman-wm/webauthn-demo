@@ -66,7 +66,7 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 const API_URL = "https://localhost:3001";
 
 const createLogger = (tagName: string) => {
-  return (message: string) => logger.info(message, tagName);
+  return (message: string) => logger.info("\n" + message, tagName);
 };
 
 const webAuthn: WebAuthn = {
@@ -75,7 +75,7 @@ const webAuthn: WebAuthn = {
    */
   register: {
     generateOptions: async (username) => {
-      const logInfo = createLogger("WebAuthn:Register");
+      const logInfo = createLogger("WebAuthn:Registration");
 
       // 1. 서버로부터 Registration에 필요한 정보 요청
       logInfo(
@@ -91,25 +91,27 @@ const webAuthn: WebAuthn = {
       const optionsJSON =
         await generateOptionsResponse.json<PublicKeyCredentialCreationOptionsJSON>();
       logInfo(
-        `서버가 전달한 Challenge, 자격증명:\n${JSON.stringify(optionsJSON)}`
+        `서버가 전달한 Challenge, 자격증명:\n${JSON.stringify(optionsJSON, null, 2)}`
       );
 
       return optionsJSON;
     },
     startRegistration: async (optionsJSON) => {
-      const logInfo = createLogger("WebAuthn:Register");
+      const logInfo = createLogger("WebAuthn:Registration");
 
       // 2. 서버로부터 받은 정보를 바탕으로 사용할 인증기에서 서명된 Challenge, 자격 증명 생성
       logInfo(
         "서버로부터 받은 정보를 바탕으로 사용할 인증기의 서명된 Challenge, 자격 증명을 생성합니다."
       );
       const registration = await startRegistration({ optionsJSON });
-      logInfo(`서명된 Challenge, 자격 증명:\n${JSON.stringify(registration)}`);
+      logInfo(
+        `서명된 Challenge, 자격 증명:\n${JSON.stringify(registration, null, 2)}`
+      );
 
       return registration;
     },
     verify: async (registrationJSON, username) => {
-      const logInfo = createLogger("WebAuthn:Register");
+      const logInfo = createLogger("WebAuthn:Registration");
 
       // 3. 서명된 Challenge, 자격 증명을 서버로 전달하여 검증 및 Registration 완료
       logInfo(
@@ -151,7 +153,7 @@ const webAuthn: WebAuthn = {
         await generateOptionsResponse.json<PublicKeyCredentialCreationOptionsJSON>();
 
       logInfo(
-        `서버가 전달한 Challenge, 자격증명:\n${JSON.stringify(optionsJSON)}`
+        `서버가 전달한 Challenge, 자격증명:\n${JSON.stringify(optionsJSON, null, 2)}`
       );
 
       return optionsJSON;
@@ -167,7 +169,7 @@ const webAuthn: WebAuthn = {
         ...options,
         optionsJSON,
       });
-      logInfo(`서명된 Challenge:\n${JSON.stringify(authentication)}`);
+      logInfo(`서명된 Challenge:\n${JSON.stringify(authentication, null, 2)}`);
 
       return authentication;
     },

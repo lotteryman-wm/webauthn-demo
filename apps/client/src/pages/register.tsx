@@ -1,15 +1,21 @@
 import { Button, Callout, Flex, Heading, TextField } from "@radix-ui/themes";
 import { HTTPError } from "ky";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/auth";
 import { Page, useRoute } from "../contexts/route";
 
 export const RegisterPage = () => {
-  const { register } = useAuth();
+  const { webAuthn } = useAuth();
   const { navigate } = useRoute();
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      webAuthn.cancelCeremony();
+    };
+  }, []);
 
   const handleRegister = async () => {
     if (!username) {
@@ -20,11 +26,12 @@ export const RegisterPage = () => {
     setMessage(`[${username}] WebAuthn 등록을 요청 중...`);
 
     try {
-      const optionsJSON = await register.generateOptions(username);
+      const optionsJSON = await webAuthn.register.generateOptions(username);
 
-      const registrationJSON = await register.startRegistration(optionsJSON);
+      const registrationJSON =
+        await webAuthn.register.startRegistration(optionsJSON);
 
-      await register.verify(registrationJSON, username);
+      await webAuthn.register.verify(registrationJSON, username);
 
       setMessage(`✅ 등록 성공! 로그인 상태로 전환.`);
       setLoading(false);

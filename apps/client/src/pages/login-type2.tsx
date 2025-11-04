@@ -13,14 +13,14 @@ import { Page, useRoute } from "../contexts/route";
 
 export const LoginType2Page = () => {
   const { navigate } = useRoute();
-  const { login, authenticate } = useAuth();
+  const { login, webAuthn } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [step, setStep] = useState(1); // 1: ID/PW 입력, 2: MFA 대기
 
   useEffect(() => {
     return () => {
-      authenticate.cancelMemory();
+      webAuthn.cancelCeremony();
     };
   }, []);
 
@@ -38,12 +38,12 @@ export const LoginType2Page = () => {
 
   const handleMFA = async () => {
     try {
-      const optionsJSON = await authenticate.generateOptions(username);
+      const optionsJSON = await webAuthn.authenticate.generateOptions(username);
 
       const authenticationJSON =
-        await authenticate.startAuthentication(optionsJSON);
+        await webAuthn.authenticate.startAuthentication(optionsJSON);
 
-      const { username: loggedInUsername } = await authenticate.verify(
+      const { username: loggedInUsername } = await webAuthn.authenticate.verify(
         authenticationJSON,
         username
       );

@@ -34,6 +34,7 @@ interface WebAuthn {
       username: string
     ) => Promise<void>;
   };
+
   authenticate: {
     generateOptions: (
       username?: string
@@ -49,13 +50,15 @@ interface WebAuthn {
       authenticationJSON: AuthenticationResponseJSON,
       username?: string
     ) => Promise<{ username: string }>;
-    cancelMemory: () => void;
   };
+
+  cancelCeremony: () => void;
 }
 
-interface AuthContextValue extends UserState, WebAuthn {
+interface AuthContextValue extends UserState {
   login: (username: string) => void;
   logout: () => void;
+  webAuthn: WebAuthn;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -66,7 +69,7 @@ const createLogger = (tagName: string) => {
   return (message: string) => logger.info(message, tagName);
 };
 
-const WebAuthnMock: WebAuthn = {
+const webAuthn: WebAuthn = {
   /**
    * 등록 과정
    */
@@ -203,9 +206,13 @@ const WebAuthnMock: WebAuthn = {
 
       return verifyResponse.json<{ username: string }>();
     },
-    cancelMemory: () => {
-      WebAuthnAbortService.cancelCeremony();
-    },
+  },
+
+  /**
+   * Abort
+   */
+  cancelCeremony: () => {
+    WebAuthnAbortService.cancelCeremony();
   },
 };
 
@@ -229,10 +236,9 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
   const contextValue: AuthContextValue = useMemo(() => {
     return {
       ...userState,
-      register: WebAuthnMock.register,
-      authenticate: WebAuthnMock.authenticate,
       logout,
       login,
+      webAuthn,
     };
   }, [userState, login, logout]);
 

@@ -13,7 +13,7 @@ import { Page, useRoute } from "../contexts/route";
 
 export const LoginType1Page = () => {
   const { navigate } = useRoute();
-  const { login, authenticate } = useAuth();
+  const { login, webAuthn } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -25,22 +25,20 @@ export const LoginType1Page = () => {
      */
     async function handleAutoFillLogin() {
       try {
-        const optionsJSON = await authenticate.generateOptions();
+        const optionsJSON = await webAuthn.authenticate.generateOptions();
 
         /**
          * authenticationJSON은 Input 필드 내에서 PassKey 로그인 호출 시 Promise를 반환합니다.
          */
-        const authenticationJSON = await authenticate.startAuthentication(
-          optionsJSON,
-          {
+        const authenticationJSON =
+          await webAuthn.authenticate.startAuthentication(optionsJSON, {
             useBrowserAutofill: true,
-          }
-        );
+          });
 
         setLoading(true);
 
         const { username: loggedInUsername } =
-          await authenticate.verify(authenticationJSON);
+          await webAuthn.authenticate.verify(authenticationJSON);
 
         setMessage(`✅ 로그인 성공! (WebAuthn 인증 완료)`);
         login(loggedInUsername);
@@ -81,7 +79,7 @@ export const LoginType1Page = () => {
     handleAutoFillLogin();
 
     return () => {
-      authenticate.cancelMemory();
+      webAuthn.cancelCeremony();
     };
   }, []);
 
@@ -93,12 +91,12 @@ export const LoginType1Page = () => {
     setLoading(true);
 
     try {
-      const optionsJSON = await authenticate.generateOptions(username);
+      const optionsJSON = await webAuthn.authenticate.generateOptions(username);
 
       const authenticationJSON =
-        await authenticate.startAuthentication(optionsJSON);
+        await webAuthn.authenticate.startAuthentication(optionsJSON);
 
-      const { username: loggedInUsername } = await authenticate.verify(
+      const { username: loggedInUsername } = await webAuthn.authenticate.verify(
         authenticationJSON,
         username
       );
